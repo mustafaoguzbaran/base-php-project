@@ -25,7 +25,7 @@ $sorgu -> execute();
         <label>Categories</label>
         <select name="post_category">
             <?php while($kategoriVeriCek = $sorgu -> fetch(PDO::FETCH_ASSOC)) { ?>
-            <option><?php echo $kategoriVeriCek['category_name']; ?></option>
+            <option value="<?php echo $kategoriVeriCek['id']; ?>"><?php echo $kategoriVeriCek['category_name']; ?></option>
             <?php } ?>
         </select>
     </div>

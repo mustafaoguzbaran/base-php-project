@@ -15,18 +15,15 @@
         <div class="card-header">Categories</div>
         <div class="card-body">
             <div class="row">
-                <div class="col-sm-6">
-                    <ul class="list-unstyled mb-0">
-                        <li><a href="#!">Web Design</a></li>
-                        <li><a href="#!">HTML</a></li>
-                        <li><a href="#!">Freebies</a></li>
-                    </ul>
-                </div>
-                <div class="col-sm-6">
-                    <ul class="list-unstyled mb-0">
-                        <li><a href="#!">JavaScript</a></li>
-                        <li><a href="#!">CSS</a></li>
-                        <li><a href="#!">Tutorials</a></li>
+                <div class="col-12">
+                    <ul class="list-unstyled mb-0 d-flex flex-wrap">
+                        <?php
+                        $sorgu = $conn -> prepare("SELECT * FROM categories");
+                        $sorgu ->execute();
+                        while($veriCek = $sorgu -> fetch(PDO::FETCH_ASSOC)) {
+                            ?>
+                        <li class="w-50"><?php echo $veriCek['category_name']; ?></li>
+                        <?php } ?>
                     </ul>
                 </div>
             </div>

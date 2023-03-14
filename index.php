@@ -18,7 +18,7 @@ echo phpversion()
                     <div class="small text-muted"><?php echo $postVeriCek['post_created_time'] ?></div>
                     <h2 class="card-title"><?php echo $postVeriCek['post_title'] ?></h2>
                     <p class="card-text"><?php echo $postVeriCek['post_desc'] ?></p>
-                    <a class="btn btn-primary" href="#!">Read more →</a>
+                    <a class="btn btn-primary" href="/config/category_insert.php?id=<?php echo $postVeriCek['post_id']?>">Read more →</a>
                 </div>
             </div>
             <?php } ?>
