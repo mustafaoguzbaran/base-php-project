@@ -11,13 +11,15 @@ $post = $conn->prepare("INSERT INTO posts set
 post_title = :post_title,
 post_desc = :post_desc,
 post_img = :post_img,
+post_category = :post_category,
 post_content = :post_content
 ");
 $insertPost = $post ->execute(array(
 'post_title' => $_POST['post_title'],
 'post_desc' => $_POST['post_desc'],
 'post_content' => $_POST['post_content'],
-'post_img' => $_POST['post_img']
+'post_img' => $_POST['post_img'],
+'post_category' => $_POST['post_category']
 ));
 }
 if($insertPost){

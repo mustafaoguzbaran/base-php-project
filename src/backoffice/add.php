@@ -2,7 +2,12 @@
 require_once "header.php"
 
 ?>
-<form method="post" action="../../config/post_insert.php" enctype="multipart/form-data">
+<style>
+    .form-group{
+        padding: 20px;
+    }
+</style>
+<form style="margin: 100px" method="post" action="../../config/post_insert.php" enctype="multipart/form-data">
     <div class="form-group">
         <label>Post Title</label>
         <input type="text" name="post_title" class="form-control">
@@ -14,6 +19,13 @@ require_once "header.php"
     <div class="form-group">
         <label>Post Image</label>
         <input type="file" name="post_img" class="form-control" >
+    </div>
+    <div class="form-group">
+        <label>Categories</label>
+        <select name="post_category">
+            <option>Kategori 1</option>
+            <option>Kategori 2</option>
+        </select>
     </div>
 <tinymce-editor
         placeholder = "Test"
