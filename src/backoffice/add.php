@@ -1,6 +1,7 @@
 <?php
-require_once "header.php"
-
+require_once "header.php";
+$sorgu = $conn -> prepare("SELECT * FROM categories");
+$sorgu -> execute();
 ?>
 <style>
     .form-group{
@@ -23,8 +24,9 @@ require_once "header.php"
     <div class="form-group">
         <label>Categories</label>
         <select name="post_category">
-            <option>Kategori 1</option>
-            <option>Kategori 2</option>
+            <?php while($kategoriVeriCek = $sorgu -> fetch(PDO::FETCH_ASSOC)) { ?>
+            <option><?php echo $kategoriVeriCek['category_name']; ?></option>
+            <?php } ?>
         </select>
     </div>
 <tinymce-editor
