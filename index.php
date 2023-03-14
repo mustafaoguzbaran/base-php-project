@@ -1,71 +1,29 @@
 <?php
 require_once "src/web/ui/header.php";
-require_once "database/conn.php";
-
+echo phpversion()
 ?>
-
 <!-- Page content-->
 <div class="container">
     <div class="row">
         <!-- Blog entries-->
         <div class="col-lg-8">
             <!-- Featured blog post-->
+            <?php
+            $sorgu = $conn ->prepare("SELECT * FROM posts");
+            $sorgu -> execute();
+            while($postVeriCek = $sorgu -> fetch(PDO::FETCH_ASSOC)) { ?>
             <div class="card mb-4">
-                <a href="#!"><img class="card-img-top" src="https://dummyimage.com/850x350/dee2e6/6c757d.jpg" alt="..." /></a>
+                <a href="#!"><img class="card-img-top" src="<?php echo $postVeriCek['post_img']; ?>" alt="..." /></a>
                 <div class="card-body">
-                    <div class="small text-muted">January 1, 2022</div>
-                    <h2 class="card-title">Featured Post Title</h2>
-                    <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam. Dicta expedita corporis animi vero voluptate voluptatibus possimus, veniam magni quis!</p>
+                    <div class="small text-muted"><?php echo $postVeriCek['post_created_time'] ?></div>
+                    <h2 class="card-title"><?php echo $postVeriCek['post_title'] ?></h2>
+                    <p class="card-text"><?php echo $postVeriCek['post_desc'] ?></p>
                     <a class="btn btn-primary" href="#!">Read more →</a>
                 </div>
             </div>
+            <?php } ?>
             <!-- Nested row for non-featured blog posts-->
-            <div class="row">
-                <div class="col-lg-6">
-                    <!-- Blog post-->
-                    <div class="card mb-4">
-                        <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                        <div class="card-body">
-                            <div class="small text-muted">January 1, 2022</div>
-                            <h2 class="card-title h4">Post Title</h2>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                            <a class="btn btn-primary" href="#!">Read more →</a>
-                        </div>
-                    </div>
-                    <!-- Blog post-->
-                    <div class="card mb-4">
-                        <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                        <div class="card-body">
-                            <div class="small text-muted">January 1, 2022</div>
-                            <h2 class="card-title h4">Post Title</h2>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                            <a class="btn btn-primary" href="#!">Read more →</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <!-- Blog post-->
-                    <div class="card mb-4">
-                        <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                        <div class="card-body">
-                            <div class="small text-muted">January 1, 2022</div>
-                            <h2 class="card-title h4">Post Title</h2>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla.</p>
-                            <a class="btn btn-primary" href="#!">Read more →</a>
-                        </div>
-                    </div>
-                    <!-- Blog post-->
-                    <div class="card mb-4">
-                        <a href="#!"><img class="card-img-top" src="https://dummyimage.com/700x350/dee2e6/6c757d.jpg" alt="..." /></a>
-                        <div class="card-body">
-                            <div class="small text-muted">January 1, 2022</div>
-                            <h2 class="card-title h4">Post Title</h2>
-                            <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reiciendis aliquid atque, nulla? Quos cum ex quis soluta, a laboriosam.</p>
-                            <a class="btn btn-primary" href="#!">Read more →</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
             <!-- Pagination-->
             <nav aria-label="Pagination">
                 <hr class="my-0" />

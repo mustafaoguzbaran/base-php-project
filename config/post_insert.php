@@ -2,11 +2,10 @@
 require_once "../database/conn.php";
 $dirname = dirname($_SERVER['SCRIPT_NAME']);
 $dizin = str_replace("/config/post_insert.php", null, $_SERVER['REQUEST_URI']);
-$dosyaYolu = "http://".$_SERVER['HTTP_HOST'].$dizin . "/upload";
+$dosyaYolu = "http://".$_SERVER['HTTP_HOST'].$dizin . "/upload/";
 $dosyaAdiAl = $_FILES["post_img"]["name"];
+move_uploaded_file($_FILES["post_img"]["tmp_name"], "../upload/" . $_FILES['post_img']['name']);
 $_POST['post_img'] = $dosyaYolu . $dosyaAdiAl;
-move_uploaded_file($dosyaAdiAl, $dosyaYolu);
-echo $dosyaYolu;
 if(isset($_POST['insert-post'])) {
 $post = $conn->prepare("INSERT INTO posts set
 post_title = :post_title,

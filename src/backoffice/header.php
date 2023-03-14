@@ -1,13 +1,14 @@
 <?php
 //Bu değişken çalışılan dosyanın bulunduğu konumu gösterir. str_replace(değiştirilen kelime, değiştirilecek kelime, metnin tümü) parametreleri bu şekildedir.
-require_once "database/conn.php";
-require_once "config/router.php";
 $base_path = str_replace($_SERVER['DOCUMENT_ROOT'], null, dirname(__FILE__));
-
+require_once "../../database/conn.php";
+//Verileri burada çağırıyorum. execute() fonksiyonu çekilen veriyi derleme işlevi yapar.
 $sorgu = $conn -> prepare("SELECT * FROM headersettings");
 $sorgu -> execute();
 $headerSettingsVeriCek = $sorgu -> fetch(PDO::FETCH_ASSOC);
+$base_link = "http://" .  $_SERVER['HTTP_HOST'] . $base_path;
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,30 +20,19 @@ $headerSettingsVeriCek = $sorgu -> fetch(PDO::FETCH_ASSOC);
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="<?php echo $base_path . "/styles/css/styles.css"; ?>" rel="stylesheet" />
+    <link href="../web/ui/styles/css/styles.css" rel="stylesheet" />
 </head>
 <body>
 <!-- Responsive navbar-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="#!"><?php echo $headerSettingsVeriCek['logo'] ?></a>
+        <a class="navbar-brand" href="<?php echo $base_link ?>"><?php echo $headerSettingsVeriCek['logo'] ?> <b>BackOffice</b></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link" href="index.php">Anasayfa</a></li>
-                <li class="nav-item"><a class="nav-link" href="src/backoffice/add.php">İçerik Ekle</a></li>
-                <li class="nav-item"><a class="nav-link" href="src/backoffice"><b>BackOffice</b></a></li>
+                <li class="nav-item"><a class="nav-link" href="<?php echo $base_link ?>">Anasayfa</a></li>
+                <li class="nav-item"><a class="nav-link" href="<?php echo $base_link . "/add.php" ?>">İçerik Ekle</a></li>
             </ul>
         </div>
     </div>
 </nav>
-<!-- Page header with logo and tagline-->
-<header class="py-5 bg-light border-bottom mb-4">
-    <div class="container">
-        <div class="text-center my-5">
-            <h1 class="fw-bolder"><?php echo $headerSettingsVeriCek['header_title']; ?></h1>
-            <p class="lead mb-0"><?php echo $headerSettingsVeriCek['header_desc'] ?></p>
-        </div>
-    </div>
-</header>
-
