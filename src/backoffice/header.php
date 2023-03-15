@@ -6,7 +6,10 @@ require_once "../../database/conn.php";
 $sorgu = $conn -> prepare("SELECT * FROM headersettings, categories");
 $sorgu -> execute();
 $veriCek = $sorgu -> fetch(PDO::FETCH_ASSOC);
+
 $base_link = "http://" .  $_SERVER['HTTP_HOST'] . $base_path;
+
+$base_main = "http://" . $_SERVER['HTTP_HOST'] . "/PHP-myBLOG"
 ?>
 
 <!DOCTYPE html>
@@ -30,6 +33,7 @@ $base_link = "http://" .  $_SERVER['HTTP_HOST'] . $base_path;
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="<?php echo $base_main ?>">Siteyi Görüntüle</a></li>
                 <li class="nav-item"><a class="nav-link" href="<?php echo $base_link ?>">Genel Ayarlar</a></li>
                 <li class="nav-item"><a class="nav-link" href="<?php echo $base_link . "/add.php" ?>">İçerik Ekle</a></li>
                 <li class="nav-item"><a class="nav-link" href="<?php echo $base_link . "/addcategory.php" ?>">Kategori Ekle</a></li>
