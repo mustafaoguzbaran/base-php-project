@@ -1,6 +1,5 @@
 <?php
 require_once "src/web/ui/header.php";
-echo phpversion()
 ?>
 <!-- Page content-->
 <div class="container">
@@ -15,7 +14,7 @@ echo phpversion()
             <div class="card mb-4">
                 <a href="#!"><img class="card-img-top" src="<?php echo $postVeriCek['post_img']; ?>" alt="..." /></a>
                 <div class="card-body">
-                    <div class="small text-muted"><?php echo $postVeriCek['post_created_time'] ?></div>
+                    <div class="small text-muted"><?php echo $postVeriCek['post_created_time'] ?></div> <div class="small text-muted"><?php echo $postVeriCek['post_created_time'] ?></div>
                     <h2 class="card-title"><?php echo $postVeriCek['post_title'] ?></h2>
                     <p class="card-text"><?php echo $postVeriCek['post_desc'] ?></p>
                     <a class="btn btn-primary" href="/config/category_insert.php?id=<?php echo $postVeriCek['post_id']?>">Read more →</a>

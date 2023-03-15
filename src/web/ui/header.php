@@ -4,7 +4,7 @@ require_once "database/conn.php";
 require_once "config/router.php";
 $base_path = str_replace($_SERVER['DOCUMENT_ROOT'], null, dirname(__FILE__));
 
-$sorgu = $conn -> prepare("SELECT * FROM headersettings, categories");
+$sorgu = $conn -> prepare("SELECT * FROM headersettings");
 $sorgu -> execute();
 $veriCek = $sorgu -> fetch(PDO::FETCH_ASSOC);
 ?>

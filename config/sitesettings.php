@@ -6,14 +6,18 @@ if(isset($_POST['update-site'])){
     $updateHeader = $conn -> prepare("UPDATE headersettings set
 logo = :logo,
 header_title = :header_title,
-header_desc = :header_desc
+header_desc = :header_desc,
+side_title = :side_title,
+side_desc = :side_desc
 where id = 1
 ");
     $kaydetUpdateHeader = $updateHeader -> execute(array(
         //Soldakiler anahtarlarımız sağdakiler ise formdan gelen verilerdir.
         'logo' => $_POST['logo'],
         'header_title' => $_POST['site_header_title'],
-        'header_desc' => $_POST['site_header_desc']
+        'header_desc' => $_POST['site_header_desc'],
+        'side_title' => $_POST['side_title'],
+        'side_desc' => $_POST['side_desc']
     ));
 }
 if($kaydetUpdateHeader){

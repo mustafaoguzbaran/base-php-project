@@ -30,9 +30,14 @@
         </div>
     </div>
     <!-- Side widget-->
+    <?php
+    $sorgu = $conn -> prepare("SELECT * FROM headersettings");
+    $sorgu -> execute();
+    $veriCek = $sorgu ->fetch(PDO::FETCH_ASSOC);
+    ?>
     <div class="card mb-4">
-        <div class="card-header">Side Widget</div>
-        <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
+        <div class="card-header"><?php echo $veriCek['side_title'] ?></div>
+        <div class="card-body"><?php echo $veriCek['side_desc'] ?></div>
     </div>
 </div>
 </div>
