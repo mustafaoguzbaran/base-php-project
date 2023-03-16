@@ -9,7 +9,6 @@ use Mobar\Models\Posts;
 $host = $_SERVER['HTTP_HOST'];
 $protocol = isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) ? "https" : "http";
 $postData = new Posts();
-echo "hello world"
 ?>
 <!-- Page content-->
 <div class="container">
