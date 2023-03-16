@@ -1,0 +1,11 @@
+{
+  "require": {
+
+    "larapack/dd": "1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Mobar\\": "lib"
+    }
+  }
+}

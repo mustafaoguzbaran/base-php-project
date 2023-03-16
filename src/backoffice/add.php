@@ -1,14 +1,14 @@
 <?php
 require_once "header.php";
-$sorgu = $conn -> prepare("SELECT * FROM categories");
-$sorgu -> execute();
+
+use Mobar\Models\Posts;
 ?>
 <style>
     .form-group{
         padding: 20px;
     }
 </style>
-<form style="margin: 100px" method="post" action="../../config/post_insert.php" enctype="multipart/form-data">
+<form style="margin: 100px" method="post" action="<?php $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
     <div class="form-group">
         <label>Post Title</label>
         <input type="text" name="post_title" class="form-control">
@@ -56,6 +56,11 @@ $sorgu -> execute();
 -->
     <button type="submit" style="margin: 10px" name="insert-post" class="btn btn-primary">Postu Gönder</button>
 </form>
+<?php
+$postInsert = new Posts();
+$postInsert ->PostInsert();
+
+?>
 <script src="https://cdn.jsdelivr.net/npm/@tinymce/tinymce-webcomponent@2/dist/tinymce-webcomponent.min.js"></script>
 
 

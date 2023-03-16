@@ -1,15 +1,13 @@
 <?php
+use Mobar\Models\Settings;
 //Bu değişken çalışılan dosyanın bulunduğu konumu gösterir. str_replace(değiştirilen kelime, değiştirilecek kelime, metnin tümü) parametreleri bu şekildedir.
 $base_path = str_replace($_SERVER['DOCUMENT_ROOT'], null, dirname(__FILE__));
-require_once "../../database/conn.php";
-//Verileri burada çağırıyorum. execute() fonksiyonu çekilen veriyi derleme işlevi yapar.
-$sorgu = $conn -> prepare("SELECT * FROM headersettings, categories");
-$sorgu -> execute();
-$veriCek = $sorgu -> fetch(PDO::FETCH_ASSOC);
+require "../../vendor/autoload.php";
+$protocol = isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) ? "https" : "http";
+$base_link = $protocol . "://" . $_SERVER['HTTP_HOST'] . $base_path;
+$base_main = "http://" . $_SERVER['HTTP_HOST'] . "/PHP-myBLOG";
+$fetchData = new Settings()
 
-$base_link = "http://" .  $_SERVER['HTTP_HOST'] . $base_path;
-
-$base_main = "http://" . $_SERVER['HTTP_HOST'] . "/PHP-myBLOG"
 ?>
 
 <!DOCTYPE html>
@@ -29,7 +27,7 @@ $base_main = "http://" . $_SERVER['HTTP_HOST'] . "/PHP-myBLOG"
 <!-- Responsive navbar-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="<?php echo $base_link ?>"><?php echo $veriCek['logo'] ?> <b>BackOffice</b></a>
+        <a class="navbar-brand" href="<?php echo $base_link ?>"><?php echo $fetchData -> settingsFetch('logo'); ?><b>BackOffice</b></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
