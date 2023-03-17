@@ -29,7 +29,6 @@ $updateSite = new Settings();
     </form>
 </div>
 <?php
-echo "test";
 $updateSite->siteSettings();
 ?>
 <?php require_once "footer.php"; ?>
