@@ -1,3 +1,9 @@
+<?php use Mobar\Models\Category;
+use Mobar\Models\Settings;
+
+$fetchSideCategoryData = new Category();
+$fetchSideSettingData = new Settings();
+?>
 <!-- Side widgets-->
 <div class="col-lg-4">
     <!-- Search widget-->
@@ -18,11 +24,9 @@
                 <div class="col-12">
                     <ul class="list-unstyled mb-0 d-flex flex-wrap">
                         <?php
-                        $sorgu = $conn -> prepare("SELECT * FROM categories");
-                        $sorgu ->execute();
-                        while($veriCek = $sorgu -> fetch(PDO::FETCH_ASSOC)) {
+                        foreach($fetchSideCategoryData->fetchCategoryData() as $value) {
                             ?>
-                        <li class="w-50"><?php echo $veriCek['category_name']; ?></li>
+                        <li class="w-50"><?php echo $value['category_name']; ?></li>
                         <?php } ?>
                     </ul>
                 </div>
@@ -30,14 +34,9 @@
         </div>
     </div>
     <!-- Side widget-->
-    <?php
-    $sorgu = $conn -> prepare("SELECT * FROM headersettings");
-    $sorgu -> execute();
-    $veriCek = $sorgu ->fetch(PDO::FETCH_ASSOC);
-    ?>
     <div class="card mb-4">
-        <div class="card-header"><?php echo $veriCek['side_title'] ?></div>
-        <div class="card-body"><?php echo $veriCek['side_desc'] ?></div>
+        <div class="card-header"><?php echo $fetchSideSettingData->settingsFetch('side_title') ?></div>
+        <div class="card-body"><?php echo $fetchSideSettingData->settingsFetch('side_desc') ?></div>
     </div>
 </div>
 </div>

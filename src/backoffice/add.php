@@ -1,7 +1,9 @@
 <?php
 require_once "header.php";
 
+use Mobar\Models\Category;
 use Mobar\Models\Posts;
+$categoryDataFetch = new Category();
 ?>
 <style>
     .form-group{
@@ -24,8 +26,8 @@ use Mobar\Models\Posts;
     <div class="form-group">
         <label>Categories</label>
         <select name="post_category">
-            <?php while($kategoriVeriCek = $sorgu -> fetch(PDO::FETCH_ASSOC)) { ?>
-            <option value="<?php echo $kategoriVeriCek['id']; ?>"><?php echo $kategoriVeriCek['category_name']; ?></option>
+            <?php foreach($categoryDataFetch->fetchCategoryData() as $value) { ?>
+            <option value="<?php echo $value['id'] ?>"><?php echo $value['category_name']; ?></option>
             <?php } ?>
         </select>
     </div>

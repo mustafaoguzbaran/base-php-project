@@ -1,4 +1,9 @@
-<?php require_once "header.php"; ?>
+<?php use Mobar\Models\Posts;
+
+require_once "header.php";
+$fetchData = new Posts();
+$fetchData ->deletePostData();
+?>
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
@@ -12,17 +17,15 @@
                     <th>Operations</th>
                 </tr>
 <?php
-$sorgu = $conn ->prepare("SELECT * FROM posts");
-$sorgu -> execute();
-while($veriCek = $sorgu -> fetch(PDO::FETCH_ASSOC)){
+foreach($fetchData->fetchPostAllData() as $value){
 ?>
                 <tr>
-                    <td><?php echo $veriCek['post_title'] ?></td>
-                    <td><?php echo $veriCek['post_created_time'] ?></td>
-                    <td><?php echo $veriCek['post_desc'] ?></td>
-                    <td><?php echo $veriCek['post_category'] ?></td>
-                    <td><a href="../../config/post_delete.php?post_id=<?php echo $veriCek['post_id'] ?>"><button type="button">Delete</button></a>
-                    <a href="post_update.php?post_id=<?php echo $veriCek['post_id'] ?>"><button type="button">Update</button></a>
+                    <td><?php echo $value['post_title'] ?></td>
+                    <td><?php echo $value['post_created_time'] ?></td>
+                    <td><?php echo $value['post_desc'] ?></td>
+                    <td><?php echo $value['post_category'] ?></td>
+                    <td><a href="<?php $_SERVER['PHP_SELF'] ?>?post_id=<?php echo $value['post_id'] ?>"><button type="button">Delete</button></a>
+                    <a href="post_update.php?post_id=<?php echo $value['post_id'] ?>"><button type="button">Update</button></a>
 
                     </td>
 

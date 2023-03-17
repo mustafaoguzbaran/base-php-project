@@ -1,10 +1,10 @@
-<?php require_once "header.php"; ?>
-<?php $veriCek = $conn ->prepare("SELECT * FROM posts where post_id = :id ");
-$veriCek -> execute(array(
-        'id' => $_GET['post_id']
-    )
-);
-$updatePost = $veriCek ->fetch(PDO::FETCH_ASSOC);
+<?php use Mobar\Models\Category;
+use Mobar\Models\Posts;
+
+require_once "header.php"; ?>
+<?php
+$postProcess = new Posts();
+$categoryProcess = new Category();
 ?>
 
 <style>
@@ -12,28 +12,28 @@ $updatePost = $veriCek ->fetch(PDO::FETCH_ASSOC);
         padding: 20px;
     }
 </style>
-<form style="margin: 100px" method="post" action="../../config/post_update.php" enctype="multipart/form-data">
+<form style="margin: 100px" method="post" action="<?php $_SERVER['PHP_SELF']; ?>" enctype="multipart/form-data">
     <div class="form-group">
         <label>Post Title</label>
-        <input type="text" name="post_title" class="form-control" value="<?php echo $updatePost['post_title']; ?>">
+        <input type="text" name="post_title" class="form-control" value="<?php echo $postProcess->fetchPostContentData('post_title'); ?>">
     </div>
     <div class="form-group">
         <label>Post Desc</label>
-        <input type="text" name="post_desc" class="form-control" value="<?php echo $updatePost['post_desc'] ?>" >
+        <input type="text" name="post_desc" class="form-control" value="<?php echo $postProcess->fetchPostContentData('post_desc') ?>" >
     </div>
     <div class="form-group">
-        <input type="hidden" name="post_id" class="form-control" value="<?php echo $updatePost['post_id'] ?>" >
+        <input type="hidden" name="post_id" class="form-control" value="<?php echo $postProcess->fetchPostContentData('post_id') ?>" >
     </div>
     <div class="form-group">
         <label>Post Image</label>
         <input type="file" name="post_img" class="form-control">
-        <img src ="<?php echo $updatePost['post_img'] ?>" width="300px" height="150px" >
+        <img src ="<?php echo $postProcess->fetchPostContentData('post_img') ?>" width="300px" height="150px" >
     </div>
     <div class="form-group">
         <label>Categories</label>
         <select name="post_category">
-            <?php while($kategoriVeriCek = $sorgu -> fetch(PDO::FETCH_ASSOC)) { ?>
-                <option value="<?php echo $kategoriVeriCek['id']; ?>"><?php echo $kategoriVeriCek['category_name']; ?></option>
+            <?php foreach($categoryProcess->fetchCategoryData() as $value) { ?>
+                <option value="<?php echo $value['id'] ?>"><?php echo $value['category_name']; ?></option>
             <?php } ?>
         </select>
     </div>
@@ -55,7 +55,7 @@ $updatePost = $veriCek ->fetch(PDO::FETCH_ASSOC);
         font-size:14px
       }"
     >
-<?php echo $updatePost['post_content'] ?>
+<?php echo $postProcess->fetchPostContentData('post_content') ?>
 
     </tinymce-editor>
     <!--
@@ -65,5 +65,5 @@ $updatePost = $veriCek ->fetch(PDO::FETCH_ASSOC);
     <button type="submit" style="margin: 10px" name="insert-post" class="btn btn-primary">Postu Gönder</button>
 </form>
 <script src="https://cdn.jsdelivr.net/npm/@tinymce/tinymce-webcomponent@2/dist/tinymce-webcomponent.min.js"></script>
-
+<?php $postProcess->updatePostData() ?>
 <?php require_once "footer.php"; ?>

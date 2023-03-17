@@ -1,7 +1,11 @@
 <?php
+
+use Mobar\Models\Category;
+
 require_once "header.php";
+$categoryData = new Category();
 ?>
-    <form style="margin: 100px" method="post" action="../../config/category_insert.php">
+    <form style="margin: 100px" method="post" action="<?php $_SERVER['PHP_SELF']; ?>">
     <div class="form-group">
         <label>Kategori Ekle</label>
         <input type="text" name="add_category" class="form-control">
@@ -13,10 +17,11 @@ require_once "header.php";
 <h4>Eklenen Kategoriler</h4>
 <ul>
     <?php
-    $sorgu = $conn -> prepare("SELECT * FROM categories");
-    $sorgu -> execute();
-    while($veriCek = $sorgu -> fetch(PDO::FETCH_ASSOC)) { ?>
-    <li style="list-style-type: none" ><?php echo $veriCek['category_name'] ?></li>
+    $categoryData ->insertCategoryData();
+    $fetchData = $categoryData ->fetchCategoryData();
+    foreach($fetchData as $value){
+?>
+    <li style="list-style-type: none" ><?php echo $value['category_name'] ?></li>
     <?php } ?>
 </ul>
     </center>

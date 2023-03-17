@@ -1,5 +1,6 @@
 <?php
 use Mobar\Models\Settings;
+require "vendor/autoload.php";
 //Bu değişken çalışılan dosyanın bulunduğu konumu gösterir. str_replace(değiştirilen kelime, değiştirilecek kelime, metnin tümü) parametreleri bu şekildedir.
 $base_path = str_replace($_SERVER['DOCUMENT_ROOT'], null, dirname(__FILE__));
 $fetchData = new Settings();

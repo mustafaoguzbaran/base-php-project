@@ -1,13 +1,11 @@
 <?php
 ?>
-<?php require_once "src/web/ui/header.php"; ?>
+<?php use Mobar\Models\Posts;
+
+require_once "src/web/ui/header.php"; ?>
 <?php
-$sorgu = $conn -> prepare("SELECT * FROM posts where post_id = :post_id");
-$sorgu ->execute(array(
-    "post_id" => $_GET['post_id']
-)
-);
-$veriCek = $sorgu -> fetch(PDO::FETCH_ASSOC);
+$fetchPostContentData = new Posts();
+
 ?>
 
 <!-- Page content-->
@@ -19,18 +17,18 @@ $veriCek = $sorgu -> fetch(PDO::FETCH_ASSOC);
                 <!-- Post header-->
                 <header class="mb-4">
                     <!-- Post title-->
-                    <h1 class="fw-bolder mb-1"><?php echo $veriCek['post_title'] ?></h1>
+                    <h1 class="fw-bolder mb-1"><?php echo $fetchPostContentData->fetchPostContentData('post_title'); ?></h1>
                     <!-- Post meta content-->
-                    <div class="text-muted fst-italic mb-2"><?php echo $veriCek['post_created_time']; ?></div>
+                    <div class="text-muted fst-italic mb-2"><?php echo $fetchPostContentData->fetchPostContentData('post_created_time') ?></div>
                     <!-- Post categories-->
                     <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>
                     <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
                 </header>
                 <!-- Preview image figure-->
-                <figure class="mb-4"><img class="img-fluid rounded" src="<?php echo $veriCek['post_img'] ?>" alt="..." /></figure>
+                <figure class="mb-4"><img class="img-fluid rounded" src="<?php echo $fetchPostContentData->fetchPostContentData('post_img') ?>" alt="..." /></figure>
                 <!-- Post content-->
                 <section class="mb-5">
-                    <p class="fs-5 mb-4"><?php echo $veriCek['post_content'] ?></p>
+                    <p class="fs-5 mb-4"><?php echo $fetchPostContentData->fetchPostContentData('post_content') ?></p>
 
                 </section>
             </article>
