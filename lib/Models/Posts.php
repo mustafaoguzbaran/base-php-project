@@ -58,13 +58,13 @@ class Posts extends Connection
 
     public function updatePostData()
     {
-        $dizin = str_replace("/src/backoffice/add.php", null, $_SERVER['REQUEST_URI']);
-        $dosyaYolu = "http://" . $_SERVER['HTTP_HOST'] . $dizin . "/upload/";
-        $dosyaAdiAl = $_FILES["post_img"]["name"];
-        move_uploaded_file($_FILES["post_img"]["tmp_name"], "../../upload/" . $_FILES['post_img']['name']);
-        $_POST['post_img'] = $dosyaYolu . $dosyaAdiAl;
-        echo $dizin;
-        $sorgu = $this->conn->prepare("UPDATE posts set
+        if (isset($_POST['post_update'])) {
+            $dizin = str_replace("/src/backoffice/post_update.php?post_id=" . $_GET['post_id'], null, $_SERVER['REQUEST_URI']);
+            $dosyaYolu = "http://" . $_SERVER['HTTP_HOST'] . $dizin . "/upload/";
+            $dosyaAdiAl = $_FILES["post_img"]["name"];
+            move_uploaded_file($_FILES["post_img"]["tmp_name"], "../../upload/" . $_FILES['post_img']['name']);
+            $_POST['post_img'] = $dosyaYolu . $dosyaAdiAl;
+            $sorgu = $this->conn->prepare("UPDATE posts set
             post_title = :post_title,
             post_desc = :post_desc,
             post_img = :post_img,
@@ -72,18 +72,15 @@ class Posts extends Connection
             post_content = :post_content
             where post_id= :id
          ");
-        $insert = $sorgu->execute(array(
-                "post_title" => $_POST['post_title'],
-                "post_desc" => $_POST['post_desc'],
-                "post_img" => $_POST['post_img'],
-                "post_category" => $_POST['post_category'],
-                "post_content" => $_POST['post_content'],
-                "id" => $_GET['post_id']
-            )
-        );
-        if ($insert) {
-            Header("Location: http://localhost:8888/PHP-myBLOG/");
-            exit;
+            $postUpdate = $sorgu->execute(array(
+                    "post_title" => $_POST['post_title'],
+                    "post_desc" => $_POST['post_desc'],
+                    "post_img" => $_POST['post_img'],
+                    "post_category" => $_POST['post_category'],
+                    "post_content" => $_POST['post_content'],
+                    "id" => $_GET['post_id']
+                )
+            );
         }
     }
 

@@ -62,7 +62,7 @@ $categoryProcess = new Category();
       Sourcing the `tinymce-webcomponent` from jsDelivr,
       which sources TinyMCE from the Tiny Cloud.
     -->
-    <button type="submit" style="margin: 10px" name="insert-post" class="btn btn-primary">Postu Gönder</button>
+    <button type="submit" style="margin: 10px" name="post_update" class="btn btn-primary">Postu Gönder</button>
 </form>
 <script src="https://cdn.jsdelivr.net/npm/@tinymce/tinymce-webcomponent@2/dist/tinymce-webcomponent.min.js"></script>
 <?php $postProcess->updatePostData() ?>
