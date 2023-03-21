@@ -2,7 +2,7 @@
 ?>
 <?php use Mobar\Models\Posts;
 
-require_once "src/web/ui/header.php"; ?>
+require "views/layouts/header.php"; ?>
 <?php
 $fetchPostContentData = new Posts();
 
@@ -76,5 +76,5 @@ $fetchPostContentData = new Posts();
             </section>
         </div>
 
-<?php require_once "src/web/ui/sidebar.php"; ?>
-<?php require_once "src/web/ui/footer.php"; ?>
+<?php require_once "views/layouts/sidebar.php"; ?>
+<?php require_once "views/layouts/footer.php"; ?>

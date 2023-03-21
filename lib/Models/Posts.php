@@ -10,10 +10,10 @@ class Posts extends Connection
     public function PostInsert()
     {
         if (isset($_POST['insert-post'])) {
-            $dizin = str_replace("/src/backoffice/add.php", null, $_SERVER['REQUEST_URI']);
+            $dizin = str_replace("/postinsert", null, $_SERVER['REQUEST_URI']);
             $dosyaYolu = "http://" . $_SERVER['HTTP_HOST'] . $dizin . "/upload/";
             $dosyaAdiAl = $_FILES["post_img"]["name"];
-            move_uploaded_file($_FILES["post_img"]["tmp_name"], "../../upload/" . $_FILES['post_img']['name']);
+            move_uploaded_file($_FILES["post_img"]["tmp_name"], "upload/" . $_FILES['post_img']['name']);
             $_POST['post_img'] = $dosyaYolu . $dosyaAdiAl;
 
 
@@ -24,17 +24,14 @@ class Posts extends Connection
                 post_category = :post_category,
                 post_content = :post_content
 ");
-            $insertPost = $post->execute(array(
-                'post_title' => $_POST['post_title'],
-                'post_desc' => $_POST['post_desc'],
-                'post_content' => $_POST['post_content'],
-                'post_img' => $_POST['post_img'],
-                'post_category' => $_POST['post_category']
-            ));
+            $post->bindParam(':post_title', $_POST['post_title']);
+            $post->bindParam(':post_desc', $_POST['post_desc']);
+            $post->bindParam(':post_img', $_POST['post_img']);
+            $post->bindParam(':post_category', $_POST['post_category']);
+            $post->bindParam(':post_content', $_POST['post_content']);
+            $post->execute();
         }
-
     }
-
 
     public function fetchPostAllData()
     {
@@ -59,38 +56,56 @@ class Posts extends Connection
     public function updatePostData()
     {
         if (isset($_POST['post_update'])) {
-            $dizin = str_replace("/src/backoffice/post_update.php?post_id=" . $_GET['post_id'], null, $_SERVER['REQUEST_URI']);
+            $dizin = str_replace("/postupdateprocess?post_id=" . $_GET['post_id'], null, $_SERVER['REQUEST_URI']);
             $dosyaYolu = "http://" . $_SERVER['HTTP_HOST'] . $dizin . "/upload/";
             $dosyaAdiAl = $_FILES["post_img"]["name"];
-            move_uploaded_file($_FILES["post_img"]["tmp_name"], "../../upload/" . $_FILES['post_img']['name']);
+            move_uploaded_file($_FILES["post_img"]["tmp_name"], "upload/" . $_FILES['post_img']['name']);
             $_POST['post_img'] = $dosyaYolu . $dosyaAdiAl;
-            $sorgu = $this->conn->prepare("UPDATE posts set
+            echo $dizin;
+            $postUpdate = $this->conn->prepare("UPDATE posts set
             post_title = :post_title,
             post_desc = :post_desc,
             post_img = :post_img,
             post_category = :post_category,
             post_content = :post_content
-            where post_id= :id
+            where post_id = :id
          ");
-            $postUpdate = $sorgu->execute(array(
-                    "post_title" => $_POST['post_title'],
-                    "post_desc" => $_POST['post_desc'],
-                    "post_img" => $_POST['post_img'],
-                    "post_category" => $_POST['post_category'],
-                    "post_content" => $_POST['post_content'],
-                    "id" => $_GET['post_id']
-                )
-            );
+            $postUpdate->bindParam(':post_title', $_POST['post_title']);
+            $postUpdate->bindParam(':post_desc', $_POST['post_desc']);
+            $postUpdate->bindParam(':post_img', $_POST['post_img']);
+            $postUpdate->bindParam(':post_category', $_POST['post_category']);
+            $postUpdate->bindParam(':post_content', $_POST['post_content']);
+            $postUpdate->bindParam(':id', $_POST['post_id']);
+            $postUpdateData = $postUpdate->execute();
+            if(isset($postUpdateData)){
+                Header("Location: anasayfa");
+            }
         }
+
     }
 
     public function fetchPostContentData($fetchDataCheck)
     {
         $fetchData = $this->conn->prepare("SELECT * FROM posts WHERE post_id = :id");
-        $fetchData->execute(array(
-            "id" => $_GET['post_id']
-        ));
+        $fetchData->bindParam(':id', $_GET['post_id']);
+        $fetchData->execute();
         $fetchContentData = $fetchData->fetch(\PDO::FETCH_ASSOC);
         return $fetchContentData[$fetchDataCheck];
+    }
+    public function postSearch()
+    {
+        $key = $_POST['search'];
+        if (isset($_POST['searchbutton'])) {
+            $searchPost = $this->conn->query("SELECT * FROM posts WHERE post_title LIKE '%$key%'", \PDO::FETCH_ASSOC);
+            $searchPost->execute();
+            $searchPostData = $searchPost->fetchAll(\PDO::FETCH_ASSOC);
+            if(!empty($searchPostData)){
+                return $searchPostData;
+
+            }else{
+                echo "<center>Veri Bulunamadı</center>";
+                exit();
+            }
+        }
     }
 }

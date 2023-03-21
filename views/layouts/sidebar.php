@@ -1,8 +1,10 @@
 <?php use Mobar\Models\Category;
+use Mobar\Models\Posts;
 use Mobar\Models\Settings;
 
 $fetchSideCategoryData = new Category();
 $fetchSideSettingData = new Settings();
+$fetchPostData = new Posts();
 ?>
 <!-- Side widgets-->
 <div class="col-lg-4">
@@ -10,10 +12,12 @@ $fetchSideSettingData = new Settings();
     <div class="card mb-4">
         <div class="card-header">Search</div>
         <div class="card-body">
+            <form method="post" action="searchdata">
             <div class="input-group">
-                <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" />
-                <button class="btn btn-primary" id="button-search" type="button">Go!</button>
+                <input class="form-control" type="text" placeholder="Enter search term..." aria-label="Enter search term..." aria-describedby="button-search" name="search" />
+                <button class="btn btn-primary" id="button-search" name="searchbutton" type="Submit">Go!</button>
             </div>
+            </form>
         </div>
     </div>
     <!-- Categories widget-->

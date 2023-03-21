@@ -17,7 +17,7 @@ class Category extends Connection
             );
         }
         if (isset($insert)) {
-            Header("Location: " .  $_SERVER['PHP_SELF'] );
+            Header("Location: addcategory" );
         }
     }
     public function fetchCategoryData(){

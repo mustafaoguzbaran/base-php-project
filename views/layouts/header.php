@@ -1,9 +1,12 @@
 <?php
 use Mobar\Models\Settings;
-require "vendor/autoload.php";
+use Mobar\Models\User;
+
 //Bu değişken çalışılan dosyanın bulunduğu konumu gösterir. str_replace(değiştirilen kelime, değiştirilecek kelime, metnin tümü) parametreleri bu şekildedir.
 $base_path = str_replace($_SERVER['DOCUMENT_ROOT'], null, dirname(__FILE__));
 $fetchData = new Settings();
+$user = new User();
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,19 +19,38 @@ $fetchData = new Settings();
     <!-- Favicon-->
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <!-- Core theme CSS (includes Bootstrap)-->
-    <link href="<?php echo $base_path . "/styles/css/styles.css"; ?>" rel="stylesheet" />
+    <link href="public/assets/css/styles.css" rel="stylesheet" />
 </head>
 <body>
+<?php ?>
 <!-- Responsive navbar-->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="index.php"><?php echo $fetchData -> settingsFetch('logo') ?></a>
+        <a class="navbar-brand" href="anasayfa"><?php echo $fetchData -> settingsFetch('logo') ?><?php if(isset($_SESSION['username']) == null){
+            echo "";
+                }else{
+            echo "<b> BackOfffice</b>";
+            } ?></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                <li class="nav-item"><a class="nav-link" href="index.php">Anasayfa</a></li>
-                <li class="nav-item"><a class="nav-link" href="src/backoffice/add.php">İçerik Ekle</a></li>
-                <li class="nav-item"><a class="nav-link" href="src/backoffice"><b>BackOffice</b></a></li>
+                <?php if(isset($_SESSION['username']) == null){?>
+                    <li class="nav-item"><a class="nav-link" href="anasayfa">Anasayfa</a></li>;
+                    <li class="nav-item"><a class="nav-link" href="login">Giriş Yap</a></li>;
+                    <li class="nav-item"><a class="nav-link" href="register">kayıt Ol</a></li>;
+                <?php }else{ ?>
+                    <li class="nav-item"><a class="nav-link" href="backoffice">Genel Ayarlar</a></li>
+                    <li class="nav-item"><a class="nav-link" href="add"">İçerik Ekle</a></li>
+                    <li class="nav-item"><a class="nav-link" href="addcategory">Kategori Ekle</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contentlist">Eklenen İçerikleri Düzenle</a></li>
+                    <li class="nav-item"><a class="nav-link" href="anasayfa"><?php if(isset($_SESSION['username']) == null){
+                                echo "";
+                            }else{
+                                echo $_SESSION['username'];
+                            } ?></a></li>
+                    <li class="nav-item"><a class="nav-link" href="?islem=cikis">Çıkış Yap</a></li>
+                <?php } ?>
+
             </ul>
         </div>
     </div>
@@ -42,4 +64,4 @@ $fetchData = new Settings();
         </div>
     </div>
 </header>
-
+<?php $user->logout() ?>

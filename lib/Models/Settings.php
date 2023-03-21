@@ -20,17 +20,16 @@ class Settings extends Connection
             side_desc = :side_desc
             where id = 1
 ");
-            $kaydetUpdateHeader = $updateHeader->execute(array(
-                //Soldakiler anahtarlarımız sağdakiler ise formdan gelen verilerdir.
-                'logo' => $_POST['logo'],
-                'header_title' => $_POST['site_header_title'],
-                'header_desc' => $_POST['site_header_desc'],
-                'side_title' => $_POST['side_title'],
-                'side_desc' => $_POST['side_desc']
-            ));
+            //Soldakiler anahtarlarımız sağdakiler ise formdan gelen verilerdir.
+            $updateHeader->bindParam(':logo', $_POST['logo']);
+            $updateHeader->bindParam(':header_title', $_POST['site_header_title']);
+            $updateHeader->bindParam(':header_desc', $_POST['site_header_desc']);
+            $updateHeader->bindParam(':side_title', $_POST['side_title']);
+            $updateHeader->bindParam(':side_desc', $_POST['side_desc']);
+            $kaydetUpdateHeader = $updateHeader->execute();
         }
         if (isset($kaydetUpdateHeader)) {
-            Header("Location: " . $_SERVER['PHP_SELF']);
+            Header("Location: backoffice" );
             exit;
         }
     }
