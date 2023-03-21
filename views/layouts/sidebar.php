@@ -30,7 +30,7 @@ $fetchPostData = new Posts();
                         <?php
                         foreach($fetchSideCategoryData->fetchCategoryData() as $value) {
                             ?>
-                        <li class="w-50"><?php echo $value['category_name']; ?></li>
+                            <li class="w-50"><?php echo $value['category_name']; ?></li>
                         <?php } ?>
                     </ul>
                 </div>
