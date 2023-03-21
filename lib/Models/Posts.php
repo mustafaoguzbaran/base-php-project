@@ -35,13 +35,17 @@ class Posts extends Connection
 
     public function fetchPostAllData()
     {
-        $fetch = $this->conn->prepare("SELECT * FROM posts ORDER BY post_id DESC");
+        $fetch = $this->conn->prepare("SELECT * FROM posts ORDER BY post_id DESC LIMIT 5");
         $fetch->execute();
         return $fetch->fetchAll(\PDO::FETCH_ASSOC);
 
     }
 
-
+    public function counter(){
+        $test = $this->conn->prepare("SELECT * FROM posts");
+        $test->execute();
+        return ceil($test->rowCount() / 5);
+    }
     public function deletePostData()
     {
         if (isset($_GET['post_id'])) {
