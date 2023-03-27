@@ -1,10 +1,13 @@
 <?php
 ?>
-<?php use Mobar\Models\Posts;
+<?php use Mobar\Models\Category;
+use Mobar\Models\Posts;
 
 require "views/layouts/header.php"; ?>
 <?php
 $fetchPostContentData = new Posts();
+$categoryName = new Category();
+
 
 ?>
 
@@ -21,7 +24,7 @@ $fetchPostContentData = new Posts();
                     <!-- Post meta content-->
                     <div class="text-muted fst-italic mb-2"><?php echo $fetchPostContentData->fetchPostContentData('post_created_time') ?></div>
                     <!-- Post categories-->
-                    <a class="badge bg-secondary text-decoration-none link-light" href="#!"><?php echo $fetchPostContentData->fetchPostContentData('post_category') ?></a>
+                    <a class="badge bg-secondary text-decoration-none link-light" href="#!"><?php echo $categoryName->fetchCategoryDataId($fetchPostContentData->fetchPostContentData('post_category')); ?></a>
                 </header>
                 <!-- Preview image figure-->
                 <figure class="mb-4"><img class="img-fluid rounded" src="<?php echo $fetchPostContentData->fetchPostContentData('post_img') ?>" alt="..." /></figure>

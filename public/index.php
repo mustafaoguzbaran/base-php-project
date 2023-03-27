@@ -1,6 +1,7 @@
 <?php
 
 
+use Mobar\Models\Category;
 use Mobar\Models\Posts;
 
 require_once "views/layouts/header.php";
@@ -10,6 +11,7 @@ require_once "views/layouts/header.php";
 $host = $_SERVER['HTTP_HOST'];
 $protocol = isset($_SERVER['HTTPS']) && !empty($_SERVER['HTTPS']) ? "https" : "http";
 $postData = new Posts();
+$categoryData = new Category;
 ?>
     <!-- Page content-->
     <div class="container">
@@ -22,13 +24,14 @@ $postData = new Posts();
         $fetchData = $postData->fetchPostAllData();
 
         foreach($fetchData as $value){
+            $test = $value['post_id']
             ?>
             <div class="card mb-4">
                 <a href="#!"><img class="card-img-top" src="<?php echo $value['post_img'] ?>"
                                   alt="..."/></a>
                 <div class="card-body">
                     <div class="small text-muted"><?php echo $value['post_created_time'] ?></div>
-                    <div class="small text-muted"><?php echo $value['post_category'] ?></div>
+                    <div class="small text-muted"><?php echo $categoryData->fetchCategoryDataId($value['post_category']) ?></div>
                     <h2 class="card-title"><?php echo $value['post_title'] ?></h2>
                     <p class="card-text"><?php echo $value['post_desc'] ?></p>
                     <a class="btn btn-primary"

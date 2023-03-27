@@ -29,7 +29,7 @@ class Settings extends Connection
             $kaydetUpdateHeader = $updateHeader->execute();
         }
         if (isset($kaydetUpdateHeader)) {
-            Header("Location: backoffice" );
+            Header("Location: backoffice");
             exit;
         }
     }

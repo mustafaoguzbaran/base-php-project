@@ -17,12 +17,24 @@ class Category extends Connection
             );
         }
         if (isset($insert)) {
-            Header("Location: addcategory" );
+            Header("Location: addcategory");
         }
     }
-    public function fetchCategoryData(){
+
+    public function fetchCategoryData()
+    {
         $fetch = $this->conn->prepare("SELECT * FROM categories ORDER BY id DESC");
-        $fetch ->execute();
+        $fetch->execute();
         return $fetch->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function fetchCategoryDataId($id)
+    {
+        $test = $id;
+        $fetch = $this->conn->prepare("SELECT * FROM categories WHERE id = :id");
+        $fetch->bindParam(':id', $test);
+        $fetch->execute();
+        $fetchCategory =  $fetch->fetch(\PDO::FETCH_ASSOC);
+        return $fetchCategory['category_name'];
     }
 }

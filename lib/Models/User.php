@@ -69,12 +69,13 @@ class User extends Connection
                 }
 
 
-            }else{
+            } else {
                 echo "Geçersiz E-Posta Girdiniz!";
             }
 
         }
     }
+
     public function logout()
     {
         if (isset($_GET['islem']) && $_GET['islem'] == "cikis") {
