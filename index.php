@@ -63,6 +63,9 @@ Router::get('/search', function (){
 Router::post('/searchdata', function (){
     require "views/web/search.php";
 });
+Router::post('/postdetail', function (){
+    require "views/web/single.php";
+});
 // Rota kontrol metotunu çağırır.
 Router::dispatch();
 ?>

@@ -1,13 +1,14 @@
 <?php
 ?>
 <?php use Mobar\Models\Category;
+use Mobar\Models\Comments;
 use Mobar\Models\Posts;
 
 require "views/layouts/header.php"; ?>
 <?php
 $fetchPostContentData = new Posts();
 $categoryName = new Category();
-
+$commentProcess = new Comments()
 
 ?>
 
@@ -24,10 +25,13 @@ $categoryName = new Category();
                     <!-- Post meta content-->
                     <div class="text-muted fst-italic mb-2"><?php echo $fetchPostContentData->fetchPostContentData('post_created_time') ?></div>
                     <!-- Post categories-->
-                    <a class="badge bg-secondary text-decoration-none link-light" href="#!"><?php echo $categoryName->fetchCategoryDataId($fetchPostContentData->fetchPostContentData('post_category')); ?></a>
+                    <a class="badge bg-secondary text-decoration-none link-light"
+                       href="#!"><?php echo $categoryName->fetchCategoryDataId($fetchPostContentData->fetchPostContentData('post_category')); ?></a>
                 </header>
                 <!-- Preview image figure-->
-                <figure class="mb-4"><img class="img-fluid rounded" src="<?php echo $fetchPostContentData->fetchPostContentData('post_img') ?>" alt="..." /></figure>
+                <figure class="mb-4"><img class="img-fluid rounded"
+                                          src="<?php echo $fetchPostContentData->fetchPostContentData('post_img') ?>"
+                                          alt="..."/></figure>
                 <!-- Post content-->
                 <section class="mb-5">
                     <p class="fs-5 mb-4"><?php echo $fetchPostContentData->fetchPostContentData('post_content') ?></p>
@@ -39,44 +43,25 @@ $categoryName = new Category();
                 <div class="card bg-light">
                     <div class="card-body">
                         <!-- Comment form-->
-                        <form class="mb-4"><textarea class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea></form>
-                        <!-- Comment with nested comments-->
-                        <div class="d-flex mb-4">
-                            <!-- Parent comment-->
-                            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                            <div class="ms-3">
-                                <div class="fw-bold">Commenter Name</div>
-                                If you're going to lead a space frontier, it has to be government; it'll never be private enterprise. Because the space frontier is dangerous, and it's expensive, and it has unquantified risks.
-                                <!-- Child comment 1-->
-                                <div class="d-flex mt-4">
-                                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                    <div class="ms-3">
-                                        <div class="fw-bold">Commenter Name</div>
-                                        And under those conditions, you cannot establish a capital-market evaluation of that enterprise. You can't get investors.
-                                    </div>
-                                </div>
-                                <!-- Child comment 2-->
-                                <div class="d-flex mt-4">
-                                    <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                                    <div class="ms-3">
-                                        <div class="fw-bold">Commenter Name</div>
-                                        When you put money directly to a problem, it makes a good headline.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Single comment-->
-                        <div class="d-flex">
-                            <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
-                            <div class="ms-3">
-                                <div class="fw-bold">Commenter Name</div>
-                                When I look at the universe and all the ways the universe wants to kill us, I find it hard to reconcile that with statements of beneficence.
-                            </div>
-                        </div>
+                        <form class="mb-4" action="postdetail?post_id=<?php echo $fetchPostContentData->fetchPostContentData('post_id') ?>" method="post">
+                            <textarea name="comment_detail" class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea>
+                            <button type="submit" style="margin: 10px" name="push_comment" class="btn btn-primary">Push Comment</button>
+                        </form>
+
+<?php foreach($commentProcess->fetchComment() as $value){ ?>
+
+                                <div class="fw-bold"><?php echo $value['commenter_name'] ?></div>
+                              <?php echo $value['comment_detail'] ?>
+
+<?php } ?>
+
+
+
+
                     </div>
                 </div>
             </section>
         </div>
-
-<?php require_once "views/layouts/sidebar.php"; ?>
-<?php require_once "views/layouts/footer.php"; ?>
+<?php $commentProcess->pushComment(); ?>
+        <?php require_once "views/layouts/sidebar.php"; ?>
+        <?php require_once "views/layouts/footer.php"; ?>
