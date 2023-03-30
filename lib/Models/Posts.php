@@ -32,10 +32,25 @@ class Posts extends Connection
             $post->execute();
         }
     }
+    public function postInstertApi($postTitle, $postDesc, $postImg, $postCategory, $postContent){
+        $postApi = $this->conn->prepare("INSERT INTO posts SET 
+                post_title = :post_title,
+                post_desc = :post_desc,
+                post_img = :post_img,
+                post_category = :post_category,
+                post_content = :post_content");
+        $postApi->bindParam(':post_title', $postTitle);
+        $postApi->bindParam(':post_desc', $postDesc);
+        $postApi->bindParam(':post_img', $postImg);
+        $postApi->bindParam(':post_category', $postCategory);
+        $postApi->bindParam(':post_content', $postContent);
+        $postApi->execute();
+    }
+
 
     public function fetchPostAllData()
     {
-        $fetch = $this->conn->prepare("SELECT * FROM posts ORDER BY post_id DESC LIMIT 5");
+        $fetch = $this->conn->prepare("SELECT * FROM posts ORDER BY post_id DESC");
         $fetch->execute();
         return $fetch->fetchAll(\PDO::FETCH_ASSOC);
 

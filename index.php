@@ -66,6 +66,12 @@ Router::post('/searchdata', function (){
 Router::post('/postdetail', function (){
     require "views/web/single.php";
 });
+Router::get('/apiGet', function (){
+    require "lib/api/apiGet.php";
+});
+Router::post('/apiPost', function (){
+    require "lib/api/apiPost.php";
+});
 // Rota kontrol metotunu çağırır.
 Router::dispatch();
 ?>
