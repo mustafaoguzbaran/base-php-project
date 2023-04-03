@@ -3,10 +3,11 @@
 use Mobar\Models\Posts;
 
 $data = new Posts();
-$token = "06032023";
-if($_GET['token'] == $token) {
+if($_SERVER['HTTP_USER_TOKEN'] == "06032023") {
     $returnArray = array();
     $returnArray['type'] = "Success";
+    $returnArray['code'] = 200;
+    http_response_code(200);
     $returnArray['count'] = count($data->fetchPostAllData());
     $returnArray['data'] = $data->fetchPostAllData();
     $sonVeri = json_encode($returnArray, 1);
@@ -14,6 +15,8 @@ if($_GET['token'] == $token) {
     }else{
     $returnArray = array();
     $returnArray['type'] = "Error";
+    $returnArray['code'] = 401;
+    http_response_code(401);
     $sonVeri = json_encode($returnArray, 1);
     echo($sonVeri);
 }

@@ -47,7 +47,27 @@ class Posts extends Connection
         $postApi->execute();
     }
 
+    public function postUpdateApi($postTitle, $postDesc, $postImg, $postContent, $postId){
+        $postApi = $this->conn-> prepare("UPDATE posts SET
+                 post_title = :post_title,
+                 post_desc = :post_desc,
+                 post_img = :post_img,
+                 post_content = :post_content
+                 WHERE post_id = :post_id
+        ");
+        $postApi->bindParam(':post_title', $postTitle);
+        $postApi->bindParam(':post_desc', $postDesc);
+        $postApi->bindParam(':post_img', $postImg);
+        $postApi->bindParam(':post_content', $postContent);
+        $postApi->bindParam(':post_id', $postId);
+        $postApi->execute();
+    }
 
+public function postDeleteApi($postId){
+        $postApi = $this->conn->prepare("DELETE FROM posts WHERE post_id = :post_id");
+        $postApi->bindParam('post_id', $postId);
+        $postApi->execute();
+}
     public function fetchPostAllData()
     {
         $fetch = $this->conn->prepare("SELECT * FROM posts ORDER BY post_id DESC");

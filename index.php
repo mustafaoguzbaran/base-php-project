@@ -72,6 +72,12 @@ Router::get('/apiGet', function (){
 Router::post('/apiPost', function (){
     require "lib/api/apiPost.php";
 });
+Router::put('/apiUpdate', function (){
+    require "lib/api/apiUpdate.php";
+});
+Router::delete('/apiDelete', function (){
+    require "lib/api/apiDelete.php";
+});
 // Rota kontrol metotunu çağırır.
 Router::dispatch();
 ?>
