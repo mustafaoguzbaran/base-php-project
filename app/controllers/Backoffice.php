@@ -1,6 +1,7 @@
 <?php
 
 namespace Controllers;
+
 use Models\Category;
 use Models\Posts;
 use Models\Settings;
@@ -61,11 +62,15 @@ class Backoffice extends Controller
         $this->postProcess->all("ORDER BY post_id DESC");
         $this->view("backoffice.editpost", ['editPost' => $this->postProcess->all("ORDER BY post_id DESC")]);
     }
-    public function postUpdateGet(){
+
+    public function postUpdateGet()
+    {
         $this->view('backoffice.postupdate', ['postUpdate' => $this->postProcess->fetch('WHERE post_id = ' . Router::request()->getLoadedRoute()->getParameters()['id']), 'categoryFetch' => $this->categoryProcess->all("ORDER BY id DESC")]);
 
     }
-    public function postUpdatePost(){
+
+    public function postUpdatePost()
+    {
         $dizin = str_replace("/backoffice/addpost", "", $_SERVER['REQUEST_URI']);
         $dosyaYolu = "http://" . $_SERVER['HTTP_HOST'] . $dizin . "/upload/";
         $dosyaAdiAl = $_FILES["post_img"]["name"];
@@ -73,7 +78,9 @@ class Backoffice extends Controller
         $_POST['post_img'] = $dosyaYolu . $dosyaAdiAl;
         $this->postProcess->updatePost(Router::request()->getLoadedRoute()->getParameters()['id']);
     }
-    public function postDelete(){
+
+    public function postDelete()
+    {
         $this->postProcess->delete((intval(Router::request()->getLoadedRoute()->getParameters()['id'])));
     }
 

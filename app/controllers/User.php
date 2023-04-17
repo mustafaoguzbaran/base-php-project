@@ -10,6 +10,7 @@ use System\Controller;
 class User extends Controller
 {
     protected $userProcess;
+
     public function __construct()
     {
         $this->userProcess = new Users();
@@ -46,19 +47,29 @@ class User extends Controller
         session_destroy();
         return Header('Location: anasayfa');
     }
-    public function fetchUsersApi(){
+
+    public function fetchUsersApi()
+    {
         return $this->response("true", "Başarılı!", $this->userProcess->all());
     }
-    public function fetchUserApi(){
-        return $this->response('true', "Başarılı", $this->userProcess->fetch('WHERE id ='));
+
+    public function fetchUserApi()
+    {
+        return $this->response('true', "Başarılı", $this->userProcess->fetch('WHERE id =' . Router::request()->getLoadedRoute()->getParameters()['id']));
     }
-    public function registerGet(){
+
+    public function registerGet()
+    {
         $this->view("web.register");
     }
-    public function registerPost(){
+
+    public function registerPost()
+    {
         $this->userProcess->register();
     }
-    public function postUserApi(){
+
+    public function postUserApi()
+    {
         return $this->response("true", "Başarılı!", $this->userProcess->register());
     }
 
