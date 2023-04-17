@@ -6,7 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
-    'Symfony\\Polyfill\\Mbstring\\' => array($vendorDir . '/symfony/polyfill-mbstring'),
-    'Symfony\\Component\\VarDumper\\' => array($vendorDir . '/symfony/var-dumper'),
-    'Mobar\\' => array($baseDir . '/lib'),
+    'Windwalker\\Edge\\' => array($vendorDir . '/windwalker/edge'),
+    'Pecee\\' => array($vendorDir . '/pecee/simple-router/src/Pecee'),
+    'Models\\' => array($baseDir . '/app/models'),
+    'Core\\' => array($baseDir . '/app/core'),
+    'Controllers\\' => array($baseDir . '/app/controllers'),
 );

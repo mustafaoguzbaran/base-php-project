@@ -1,11 +1,14 @@
 {
   "require": {
+    "windwalker/edge": "^3.0",
+    "pecee/simple-router": "5.3.0.1"
 
-    "larapack/dd": "1"
   },
-  "autoload": {
+  "autoload":{
     "psr-4": {
-      "Mobar\\": "lib"
+      "Controllers\\": "app/controllers/",
+      "Models\\": "app/models",
+      "Core\\": "app/core"
     }
   }
 }
