@@ -16,6 +16,8 @@
       <path value="$PROJECT_DIR$/vendor/larapack/dd" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
       <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
+      <path value="$PROJECT_DIR$/vendor/windwalker/edge" />
+      <path value="$PROJECT_DIR$/vendor/pecee/simple-router" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1">

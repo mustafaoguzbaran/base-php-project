@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use http\Header;
 use Models\Category;
 use Models\Posts;
 use Models\Settings;
@@ -44,6 +45,7 @@ class Backoffice extends Controller
         move_uploaded_file($_FILES["post_img"]["tmp_name"], "upload/" . $_FILES['post_img']['name']);
         $_POST['post_img'] = $dosyaYolu . $dosyaAdiAl;
         $this->postProcess->postInsert();
+        return Header("Location: /backoffice/addpost");
 
     }
 
@@ -77,6 +79,7 @@ class Backoffice extends Controller
         move_uploaded_file($_FILES["post_img"]["tmp_name"], "upload/" . $_FILES['post_img']['name']);
         $_POST['post_img'] = $dosyaYolu . $dosyaAdiAl;
         $this->postProcess->updatePost(Router::request()->getLoadedRoute()->getParameters()['id']);
+        return Header("Location: /backoffice/postupdate/" . $id);
     }
 
     public function postDelete()

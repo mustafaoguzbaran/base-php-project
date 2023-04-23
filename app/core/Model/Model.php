@@ -29,11 +29,11 @@ class Model extends Database
         if ($cond == null) {
             $fetchData = $this->conn->prepare("SELECT * FROM $this->tableName");
             $fetchData->execute();
-            return $fetchData->fetch();
+            return $fetchData->fetch(\PDO::FETCH_ASSOC);
         } else {
             $fetchData = $this->conn->prepare("SELECT * FROM $this->tableName $cond");
             $fetchData->execute();
-            return $fetchData->fetch();
+            return $fetchData->fetch(\PDO::FETCH_ASSOC);
         }
     }
 
@@ -48,7 +48,9 @@ class Model extends Database
         $updateSettings->execute();
         return Header("Location: /backoffice");
     }
-    public function updatePost($id){
+
+    public function updatePost($id)
+    {
         $updatePost = $this->conn->prepare("UPDATE $this->tableName SET post_title = :post_title, post_desc = :post_desc, post_img = :post_img, post_category = :post_category, post_content = :post_content WHERE post_id = $id");
         $updatePost->bindParam(':post_title', $_POST['post_title']);
         $updatePost->bindParam(':post_desc', $_POST['post_desc']);
@@ -56,8 +58,8 @@ class Model extends Database
         $updatePost->bindParam(':post_category', $_POST['post_category']);
         $updatePost->bindParam(':post_content', $_POST['post_content']);
         $updatePost->execute();
-        return Header("Location: /backoffice/postupdate/" . $id);
     }
+
     public function postInsert()
     {
         $postInsert = $this->conn->prepare("INSERT INTO $this->tableName SET post_title = :post_title, post_desc = :post_desc, post_img = :post_img, post_category = :post_category, post_content = :post_content
@@ -68,8 +70,6 @@ class Model extends Database
         $postInsert->bindParam(':post_category', $_POST['post_category']);
         $postInsert->bindParam(':post_content', $_POST['post_content']);
         $postInsert->execute();
-        return Header("Location: /");
-
 
     }
 
@@ -114,6 +114,5 @@ class Model extends Database
 
             }
         }
-        return Header("Location: /login");
     }
 }

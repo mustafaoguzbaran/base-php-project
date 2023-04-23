@@ -2,6 +2,7 @@
 
 namespace Controllers;
 
+use Core\Acl\Acl;
 use http\Header;
 use Models\Users;
 use Pecee\SimpleRouter\SimpleRouter as Router;
@@ -9,11 +10,13 @@ use System\Controller;
 
 class User extends Controller
 {
-    protected $userProcess;
+    public $userProcess;
+    public $middleware;
 
     public function __construct()
     {
         $this->userProcess = new Users();
+        $this->middleware = new Acl();
     }
 
     public function index()
@@ -33,6 +36,7 @@ class User extends Controller
                 echo "Kullanıcı Mevcut" . $test['username'] . $test['password'];
                 if ($test['username'] == $_POST['username_login'] && $test['password'] == md5($_POST['password_login'])) {
                     $_SESSION['username'] = $test['username'];
+                    $_SESSION['user_id'] = $test['id'];
                     return Header('Location: anasayfa');
 
                 } else {
@@ -42,6 +46,7 @@ class User extends Controller
         }
     }
 
+
     public static function destroy()
     {
         session_destroy();
@@ -50,12 +55,20 @@ class User extends Controller
 
     public function fetchUsersApi()
     {
-        return $this->response("true", "Başarılı!", $this->userProcess->all());
+        if ($this->middleware->middleware($_SESSION['user_id'], [3])) {
+            return $this->response("true", "Başarılı!", $this->userProcess->all());
+        } else {
+            return $this->response("false", "Access Denied!", header('HTTP/1.0 401 Unauthorized'));
+        }
     }
 
     public function fetchUserApi()
     {
-        return $this->response('true', "Başarılı", $this->userProcess->fetch('WHERE id =' . Router::request()->getLoadedRoute()->getParameters()['id']));
+        if ($this->middleware->middleware($_SESSION['user_id'], [6])) {
+            return $this->response('true', "Başarılı", $this->userProcess->fetch('WHERE id =' . Router::request()->getLoadedRoute()->getParameters()['id']));
+        } else {
+            return $this->response("false", "Access Denied!", header('HTTP/1.0 401 Unauthorized'));
+        }
     }
 
     public function registerGet()
@@ -66,11 +79,24 @@ class User extends Controller
     public function registerPost()
     {
         $this->userProcess->register();
+        return Header("Location: /login");
     }
 
     public function postUserApi()
     {
-        return $this->response("true", "Başarılı!", $this->userProcess->register());
+        if ($this->middleware->middleware($_SESSION['user_id'], [7])) {
+            $insertData = json_decode(file_get_contents("php://input"), true);
+            $_POST['username_register'] = $insertData['username'];
+            $_POST['password_register'] = md5($insertData['password']);
+            $_POST['email_register'] = $insertData['email'];
+            $returnArray = array();
+            $returnArray = $insertData;
+            $this->userProcess->register();
+            return $this->response(true, "Başarılı", $returnArray);
+        } else {
+            return $this->response("false", "Access Denied!", header('HTTP/1.0 401 Unauthorized'));
+        }
+
     }
 
     public function detail()
