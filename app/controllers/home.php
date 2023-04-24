@@ -88,10 +88,11 @@ class home extends Controller
             $returnArray = $updateData;
             $this->postProcess->updatePost($id);
             return $this->response(true, "Başarılı", $returnArray);
-        }else{
+        } else {
             return $this->response("false", "Access Denied", header('HTTP/1.0 401 Unauthorized'));
         }
     }
+
     public
     function index()
     {

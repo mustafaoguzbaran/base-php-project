@@ -31,8 +31,11 @@
                         <!-- Comment form-->
                         <form class="mb-4" action="postdetail?post_id=<?php echo $post['post_id'] ?>" method="post">
                             <input name="commenter_name" class="form-control" placeholder="Name Surname">
-                            <textarea name="comment_detail" class="form-control" rows="3" placeholder="Join the discussion and leave a comment!"></textarea>
-                            <button type="submit" style="margin: 10px" name="push_comment" class="btn btn-primary">Push Comment</button>
+                            <textarea name="comment_detail" class="form-control" rows="3"
+                                      placeholder="Join the discussion and leave a comment!"></textarea>
+                            <button type="submit" style="margin: 10px" name="push_comment" class="btn btn-primary">Push
+                                Comment
+                            </button>
                         </form>
 
                     </div>

@@ -6,5 +6,5 @@ use Core\Model\Model;
 
 class Category extends Model
 {
-  protected string $tableName = "categories";
+    protected string $tableName = "categories";
 }
