@@ -5,16 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ae054cdb-4464-4517-bf1b-c6748265d7bd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/app/core/Acl/Acl.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/views/web/test.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/views/backoffice/token.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/Backoffice.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/Backoffice.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/controllers/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/controllers/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/controllers/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/core/Model/Model.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/core/Model/Model.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/Users.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/Users.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/layouts/header.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/layouts/header.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/Routes.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/Routes.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_psr4.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/autoload_static.php" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/autoload_static.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vendor/composer/installed.json" beforeDir="false" afterPath="$PROJECT_DIR$/vendor/composer/installed.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +42,8 @@
       <path value="$PROJECT_DIR$/vendor/symfony/var-dumper" />
       <path value="$PROJECT_DIR$/vendor/windwalker/edge" />
       <path value="$PROJECT_DIR$/vendor/pecee/simple-router" />
+      <path value="$PROJECT_DIR$/vendor/psr/clock" />
+      <path value="$PROJECT_DIR$/vendor/lcobucci/jwt" />
     </include_path>
   </component>
   <component name="ProblemsViewState">
@@ -64,7 +67,13 @@
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
     "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "mysql"
+    ]
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -85,7 +94,7 @@
       <workItem from="1680853494347" duration="235000" />
       <workItem from="1680853738742" duration="188000" />
       <workItem from="1680853953511" duration="523000" />
-      <workItem from="1681817057634" duration="8334000" />
+      <workItem from="1681817057634" duration="44173000" />
     </task>
     <servers />
   </component>

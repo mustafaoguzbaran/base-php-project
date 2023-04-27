@@ -7,8 +7,11 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Windwalker\\Edge\\' => array($vendorDir . '/windwalker/edge'),
+    'Psr\\Clock\\' => array($vendorDir . '/psr/clock/src'),
     'Pecee\\' => array($vendorDir . '/pecee/simple-router/src/Pecee'),
     'Models\\' => array($baseDir . '/app/models'),
+    'Lcobucci\\JWT\\' => array($vendorDir . '/lcobucci/jwt/src'),
+    'Firebase\\JWT\\' => array($vendorDir . '/firebase/php-jwt/src'),
     'Core\\' => array($baseDir . '/app/core'),
     'Controllers\\' => array($baseDir . '/app/controllers'),
 );

@@ -15,7 +15,7 @@ class Acl extends Database
         return !empty(array_intersect($values, $arr));
     }
 
-    public function apiUserisLoged()
+    public function apiUserisLogged()
     {
 
         $fetchUserData = new User();

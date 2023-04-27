@@ -24,12 +24,15 @@ Router::group(['prefix' => "/backoffice"], function () {
     Router::get('/postupdate/{id}', 'Controllers\Backoffice@postUpdateGet');
     Router::post('/postupdate/{id}', "Controllers\Backoffice@postUpdatePost");
     Router::get('/deletepost/{id}', "Controllers\Backoffice@postDelete");
+    Router::get('/tokenrequest', "Controllers\Backoffice@tokenRequestGet");
+    Router::post('/tokenrequest', "Controllers\Backoffice@tokenRequestPost");
 
 });
 
 
 Router::group(['prefix' => "/api/v1"], function () {
     Router::get('/detail', "Controllers\User@detail");
+    Router::get('/detail2', "Controllers\User@detail2");
     Router::get('/posts', "Controllers\home@fetchPostsApi");
     Router::get('/post/{id}', "Controllers\home@fetchPostApi");
     Router::delete('/postdelete/{id}', "Controllers\home@deletePostApi");

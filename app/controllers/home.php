@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Core\Acl\Acl;
+use Core\API\ApiValidation;
 use Models\Category;
 use Models\Posts;
 use Models\Settings;
@@ -15,18 +16,20 @@ class home extends Controller
     protected $middleware;
     protected $postProcess;
     protected $categoryProcess;
+    protected $tokenId;
 
     public function __construct()
     {
+        $this->tokenId = new ApiValidation();
         $this->middleware = new Acl();
-        $this->middleware->apiUserisLoged();
+        $this->middleware->apiUserisLogged();
         $this->postProcess = new Posts();
         $this->categoryProcess = new Category();
     }
 
     public function fetchPostsApi()
     {
-        if ($this->middleware->middleware($_SESSION['user_id'], [1])) {
+        if ($this->middleware->middleware($this->tokenId->apiAuth(), [1])) {
             $data = $this->postProcess->all("ORDER BY post_id DESC");
             return $this->response(true, "Başarılı", $data);
         } else {
@@ -36,7 +39,7 @@ class home extends Controller
 
     public function fetchPostApi()
     {
-        if ($this->middleware->middleware($_SESSION['user_id'], [1])) {
+        if ($this->middleware->middleware($this->tokenId->apiAuth(), [1])) {
             $data = $this->postProcess->fetch("WHERE post_id = " . Router::request()->getLoadedRoute()->getParameters()['id']);
             return $this->response(true, "Başarılı", $data);
         } else {
@@ -47,7 +50,7 @@ class home extends Controller
 
     public function deletePostApi()
     {
-        if ($this->middleware->middleware($_SESSION['user_id'], [4])) {
+        if ($this->middleware->middleware($this->tokenId->apiAuth(), [4])) {
             $delete = $this->postProcess->delete(Router::request()->getLoadedRoute()->getParameters()['id']);
             return $this->response(true, "Başarılı", $delete);
         } else {
@@ -57,7 +60,7 @@ class home extends Controller
 
     public function postInsertApi()
     {
-        if ($this->middleware->middleware($_SESSION['user_id'], [2])) {
+        if ($this->middleware->middleware($this->tokenId->apiAuth(), [2])) {
             $insertData = json_decode(file_get_contents('php://input'), true);
             $_POST['post_title'] = $insertData['post_title'];
             $_POST['post_desc'] = $insertData['post_desc'];
@@ -76,7 +79,7 @@ class home extends Controller
     public
     function postUpdateApi()
     {
-        if ($this->middleware->middleware($_SESSION['user_id'], [5])) {
+        if ($this->middleware->middleware($this->tokenId->apiAuth(), [5])) {
             $updateData = json_decode(file_get_contents("php://input"), true);
             $id = $updateData['id'];
             $_POST['post_title'] = $updateData['post_title'];

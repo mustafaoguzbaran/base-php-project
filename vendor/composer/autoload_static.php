@@ -13,11 +13,20 @@ class ComposerStaticInit1d8ec8a374b3268dd69b7e4c44c829b2
         ),
         'P' => 
         array (
+            'Psr\\Clock\\' => 10,
             'Pecee\\' => 6,
         ),
         'M' => 
         array (
             'Models\\' => 7,
+        ),
+        'L' => 
+        array (
+            'Lcobucci\\JWT\\' => 13,
+        ),
+        'F' => 
+        array (
+            'Firebase\\JWT\\' => 13,
         ),
         'C' => 
         array (
@@ -31,6 +40,10 @@ class ComposerStaticInit1d8ec8a374b3268dd69b7e4c44c829b2
         array (
             0 => __DIR__ . '/..' . '/windwalker/edge',
         ),
+        'Psr\\Clock\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/clock/src',
+        ),
         'Pecee\\' => 
         array (
             0 => __DIR__ . '/..' . '/pecee/simple-router/src/Pecee',
@@ -38,6 +51,14 @@ class ComposerStaticInit1d8ec8a374b3268dd69b7e4c44c829b2
         'Models\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app/models',
+        ),
+        'Lcobucci\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/lcobucci/jwt/src',
+        ),
+        'Firebase\\JWT\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
         'Core\\' => 
         array (

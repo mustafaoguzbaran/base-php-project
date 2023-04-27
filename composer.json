@@ -2,7 +2,9 @@
   "require": {
     "windwalker/edge": "^3.0",
     "pecee/simple-router": "5.3.0.1",
-    "ext-pdo": "*"
+    "ext-pdo": "*",
+    "lcobucci/jwt": "^5.0",
+    "firebase/php-jwt": "^6.4"
 
   },
   "autoload":{

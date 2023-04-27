@@ -32,6 +32,7 @@
                     <li class="nav-item"><a class="nav-link" href="/backoffice/addpost">İçerik Ekle</a></li>
                     <li class="nav-item"><a class="nav-link" href="/backoffice/addcategory">Kategori Ekle</a></li>
                     <li class="nav-item"><a class="nav-link" href="/backoffice/editpost">Eklenen İçerikleri Düzenle</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/backoffice/tokenrequest">Token Al</a></li>
                     <li class="nav-item"><a class="nav-link" href="/"><?php if($_SESSION['username'] == null) {echo "";}else{echo $_SESSION['username'];} ?></a></li>
                     <li class="nav-item"><a class="nav-link" href="cikis">Çıkış Yap</a></li>
                 @endif

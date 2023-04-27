@@ -7,6 +7,8 @@
       <sourceFolder url="file://$MODULE_DIR$/app/controllers" isTestSource="false" packagePrefix="Controllers\" />
       <sourceFolder url="file://$MODULE_DIR$/app/core" isTestSource="false" packagePrefix="Core\" />
       <sourceFolder url="file://$MODULE_DIR$/app/models" isTestSource="false" packagePrefix="Models\" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/lcobucci/jwt" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/psr/clock" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
