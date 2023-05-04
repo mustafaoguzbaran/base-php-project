@@ -4,6 +4,7 @@ namespace Controllers;
 
 use Core\Acl\Acl;
 use Core\API\ApiValidation;
+use Core\API\WebhookService;
 use Models\Category;
 use Models\Posts;
 use Models\Settings;
@@ -17,6 +18,7 @@ class home extends Controller
     protected $postProcess;
     protected $categoryProcess;
     protected $tokenId;
+    protected $webhookService;
 
     public function __construct()
     {
@@ -25,6 +27,8 @@ class home extends Controller
         $this->middleware->apiUserisLogged();
         $this->postProcess = new Posts();
         $this->categoryProcess = new Category();
+        $this->webhookService = new WebhookService();
+
     }
 
     public function fetchPostsApi()
@@ -111,7 +115,29 @@ class home extends Controller
     public
     function testGet()
     {
-        $this->view('web.test');
+        if($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $url = "http://localhost:8080/webhookresponse";
+            $data = array("name" => "Mustafa Oğuz", "Surname"=>"Baran");
+            $options = array(
+                "http" => array(
+                    'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                    'method'  => 'POST',
+                    'content' => http_build_query($data),
+                )
+            );
+            $context  = stream_context_create($options);
+            $result = file_get_contents($url, false, $context);
+        }else{
+            header('Content-Type: application/json');
+            $response_array = array('status' => 'false', 'message' => 'Webhook İşlenmedi');
+            return json_encode($response_array);
+        }
     }
+    public function testPost(){
+        $this->webhookService->webhookPost();
+    }
+public function apidoc(){
+        $this->view("web.apidoc");
+}
 
 }

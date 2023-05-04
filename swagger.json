@@ -1,0 +1,534 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "V1",
+    "title": "PHP BASE BLOG PROJECT Management API"
+  },
+  "host": "localhost:8080",
+  "basePath": "/api/v1/",
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "jwt": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "paths": {
+    "/user/{id}": {
+      "get": {
+        "summary": "ID'ye göre kullanıcı verilerini alır",
+        "description": "Belirtilen ID numarasına sahip kullanıcının bilgilerini getirir",
+        "tags": [
+          "Users"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Kullanıcı ID'si",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Başarılı cevap",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "username": {
+                        "type": "string"
+                      },
+                      "password": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Bir hata oluştu"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/users": {
+      "get": {
+        "summary": "Tüm kullanıcı bilgilerini alma",
+        "description": "Bu endpoint tüm kullanıcı bilgilerini çeker",
+        "tags": [
+          "Users"
+        ],
+        "responses": {
+          "200": {
+            "description": "Başarılı",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "username": {
+                        "type": "string"
+                      },
+                      "password": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Bir hata oluştu"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/postuser": {
+      "post": {
+        "summary": "Yeni kulllanıcı kaydı oluşturur",
+        "description": "Bu endpoint yeni kullanıcı kaydı oluşturur",
+        "tags": [
+          "Users"
+        ],
+        "responses": {
+          "200": {
+            "description": "Başarılı",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer"
+                      },
+                      "username": {
+                        "type": "string"
+                      },
+                      "password": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Bir hata oluştu"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/postinsert": {
+      "post": {
+        "summary": "Yeni post eklemek için kullanılır",
+        "description": "Bu endpoint yeni post eklemek için kullanılır",
+        "tags": [
+          "Posts"
+        ],
+        "responses": {
+          "200": {
+            "description": "Başarılı",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "post_title": {
+                        "type": "string"
+                      },
+                      "post_desc": {
+                        "type": "string"
+                      },
+                      "post_img": {
+                        "type": "string"
+                      },
+                      "post_category": {
+                        "type": "string"
+                      },
+                      "post_content": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Bir hata oluştu"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/post/{id}": {
+      "get": {
+        "summary": "ID'ye göre post verilerini çeker",
+        "description": "Bu endpoint verilen id değerine göre post verilerini çeker",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Post Id'si",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "tags": [
+          "Posts"
+        ],
+        "responses": {
+          "200": {
+            "description": "Başarılı",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "post_id": {
+                        "type": "integer"
+                      },
+                      "post_title": {
+                        "type": "string"
+                      },
+                      "post_created_time": {
+                        "type": "string"
+                      },
+                      "post_desc": {
+                        "type": "string"
+                      },
+                      "post_img": {
+                        "type": "string"
+                      },
+                      "post_category": {
+                        "type": "string"
+                      },
+                      "post_content": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Bir hata oluştu"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+    "/posts": {
+      "get": {
+        "summary": "Tüm post verilerini çeker",
+        "description": "Bu endpoint tüm post verilerini çeker",
+        "tags": [
+          "Posts"
+        ],
+        "responses": {
+          "200": {
+            "description": "Başarılı",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "post_id": {
+                        "type": "integer"
+                      },
+                      "post_title": {
+                        "type": "string"
+                      },
+                      "post_created_time": {
+                        "type": "string"
+                      },
+                      "post_desc": {
+                        "type": "string"
+                      },
+                      "post_img": {
+                        "type": "string"
+                      },
+                      "post_category": {
+                        "type": "string"
+                      },
+                      "post_content": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Bir hata oluştu"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+
+    "/postdelete/{id}": {
+      "delete": {
+        "summary": "ID'ye göre post verilerini siler",
+        "description": "Bu endpoint verilen id değerine göre post verilerini siler",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Post Id'si",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "tags": [
+          "Posts"
+        ],
+        "responses": {
+          "200": {
+            "description": "Başarılı",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "post_id": {
+                        "type": "integer"
+                      },
+                      "post_title": {
+                        "type": "string"
+                      },
+                      "post_created_time": {
+                        "type": "string"
+                      },
+                      "post_desc": {
+                        "type": "string"
+                      },
+                      "post_img": {
+                        "type": "string"
+                      },
+                      "post_category": {
+                        "type": "string"
+                      },
+                      "post_content": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Bir hata oluştu"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    },
+
+    "/postupdate/{id}": {
+      "put": {
+        "summary": "ID'ye göre post verilerini günceller",
+        "description": "Bu endpoint verilen id değerine göre post verilerini günceller",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Post Id'si",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "tags": [
+          "Posts"
+        ],
+        "responses": {
+          "200": {
+            "description": "Başarılı",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "status": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "data": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "post_id": {
+                        "type": "integer"
+                      },
+                      "post_title": {
+                        "type": "string"
+                      },
+                      "post_created_time": {
+                        "type": "string"
+                      },
+                      "post_desc": {
+                        "type": "string"
+                      },
+                      "post_img": {
+                        "type": "string"
+                      },
+                      "post_category": {
+                        "type": "string"
+                      },
+                      "post_content": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Bir hata oluştu"
+          }
+        },
+        "security": [
+          {
+            "jwt": []
+          }
+        ]
+      }
+    }
+  }
+
+
+
+}
